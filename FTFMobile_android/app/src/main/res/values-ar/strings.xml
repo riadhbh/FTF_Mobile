@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FTF Mobile</string>
+
+    <!--<string name="navigation_drawer_open">Open navigation drawer</string>-->
+    <!--<string name="navigation_drawer_close">Close navigation drawer</string>-->
+
+    <!--<string name="action_settings">Settings</string>-->
+
+    <string name="settings">الإعدادات</string>
+    <string name="language">اللغة</string>
+    <string name="langName">العربية</string>
+
+    <string name="cancel">إلغاء</string>
+
+    <string name="_list_format">تنسيق عرض الأخبار والألبومات</string>
+    <string name="card_format">تنسيق على شكل بطاقات للأخبار والألبومات</string>
+    <string name="list_format">تنسيق على شكل شريط للأخبار والألبومات</string>
+    <!--AppSrings-->
+    <string name="news">الأخبار</string>
+    <string name="allnews">كل الأخبار</string>
+
+    <string name="league1">الرابطة 1</string>
+    <string name="league2">الرابطة 2</string>
+    <string name="league3">الرابطة 3</string>
+    <string name="ntd">الإدارة الفنية</string>
+    <string name="referees_choices">تعيينات الحكام</string>
+
+    <string name="multimedia">وسائط متعددة</string>
+    <string name="a_photos">ألبومات الصور</string>
+    <string name="a_videos">ألبومات الفيديو</string>
+    <string name="natteam">المنتخب الوطني</string>
+
+    <string name="events">الحدث</string>
+    <string name="appointments">المواعيد</string>
+    <!--<string name="langQuest">Voulez-vous redémarrer l\'application pour changer la langue ?</string>-->
+    <string name="lanChDiagTitle">تغيير اللغة</string>
+
+    <string name="ranking">الترتيب</string>
+    <string name="calres">النتائج و الروزنامة</string>
+    <string name="gen_calendar">الروزنامة العامة</string>
+    <string name="poff_ranking">الترتيب مجموعة البلاي أف</string>
+    <string name="pout_ranking">الترتيب مجموعة تفادي النزول</string>
+    <string name="poff_calres">النتائج و الروزنامة مجموعة البلاي أف</string>
+    <string name="pout_calres">النتائج و الروزنامة مجموعة تفادي النزول</string>
+
+    <string name="netpb_title">مشكلة في الإتصال بالأنترنات</string>
+    <string name="netpb_msg">الرجاء التثبت من إعدادات الشبكة</string>
+
+    <string name="verify">تحقق</string>
+    <string name="exit">خروج</string>
+
+    <string name="m_share">مشاركة</string>
+    <string name="m_coypurl">نسخ الرابط</string>
+
+    <string name="l_round">الجولة</string>
+    <string name="l_group">المجموعة</string>
+
+    <string name="l1_rk_grpa">الترتيب الرابطة الأولى المجموعة أ</string>
+    <string name="l1_rk_grpb">الترتيب الرابطة الأولى المجموعة ب</string>
+    <string name="l1_rk_poff">التريب الرابطة الأولى مجموعة البلاي أف</string>
+    <string name="l1_rk_pout">التريب الرابطة الأولى مجموعة تفادي النزول</string>
+
+    <string name="l2_rk_grpa">الترتيب الرابطة 2 المجموعة أ</string>
+    <string name="l2_rk_grpb">الترتيب الرابطة 2 المجموعة ب</string>
+
+    <string name="link_copied">تم نسخ الرابط !</string>
+
+    <string name="pbconn_website">مشكلة في اتصال بالموقع</string>
+    <string name="nondispo_website">لا يمكن الإتصال بالموقع في الوقت الحاضر, يرجى اعادة المحاولة لاحقا.</string>
+
+    <string name="badurl_title">الرابط غير صالح</string>
+    <string name="badurl_msg">نعتذر ,الرابط غير صالح!</string>
+
+    <string-array name="l_groups">
+        <item name="l_g_a">أ</item>
+        <item name="l_g_b">ب</item>
+    </string-array>
+</resources>

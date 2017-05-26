@@ -1,0 +1,703 @@
+<?php
+
+namespace mainBundle\Controller;
+
+
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\DomCrawler\Crawler;
+
+use mainBundle\Entity\News;
+use mainBundle\Entity\NewsContent;
+use mainBundle\Controller\SimpleImage;
+
+//use Symfony\Component\HttpFoundation\Request;
+
+
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+
+class DefaultController extends Controller
+{
+    private $fr_n_tmp= array();
+    private $fr_nc_tmp=array();
+
+    private $ar_n_tmp= array();
+    private $ar_nc_tmp=array();
+
+    /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+
+    /**
+     * @Route("/v1/getnew/{id}")
+     * @Template()
+     */
+
+    public function getnewAction($id)
+    {
+
+        $em=$this->getDoctrine()->getManager();
+        $connection = $em->getConnection();
+        $statement = $connection->query('
+        select * from news_content WHERE id = '.$id.';
+        ');
+
+        $res=$statement->fetchAll();
+       $res = array('anew'=>$res);
+       echo json_encode($res);
+
+    }
+
+    /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+    /**
+     * @Route("/v1/getnews/{lang}/{start}/{end}")
+     * @Template()
+     */
+
+    public function getnewsAction($lang,$start,$end)
+    {
+ /*       $lang = 'fr';
+        $start = 11;
+        $end = 20;
+*/
+
+
+        $qlang='\''.$lang.'\'';
+
+
+        $em=$this->getDoctrine()->getManager();
+        $connection = $em->getConnection();
+
+                $statement = $connection->query('
+                select min(id) as mini from news where lang like '.$qlang.';
+                ');
+
+                $res=$statement->fetchAll();
+                $min_index = $res[0]['mini'];
+                //echo $min_index;
+
+
+                $statement = $connection->query('
+                select max(id) as maxi from news where lang like '.$qlang.';
+                ');
+
+                $res=$statement->fetchAll();
+                $max_index = $res[0]['maxi'];
+                //echo $max_index;
+        $qstart = $start + $min_index - 1;
+        $qend = $end + $min_index - 1;
+
+        if($qstart>=$min_index && $qend<=$max_index){
+
+
+
+
+
+
+        $statement = $connection->query('
+        SELECT * FROM `news` WHERE lang like '.$qlang.' and id BETWEEN '.$qstart.' and '.$qend.';
+        ');
+
+        $res=$statement->fetchAll();
+        }else
+            $res = null;
+        //print_r($res);
+
+        $res = array('news'=>$res);
+        $serializer = new Serializer(array(new GetSetMethodNormalizer()), array('json' => new
+        JsonEncoder()));
+        $json = $serializer->serialize($res, 'json');
+
+        echo $json;
+
+
+
+    }
+    /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+
+        /**
+     * @Route("/sync")
+     * @Template()
+     */
+
+    public function syncAction()
+    {
+        ini_set('max_execution_time', 960);
+        set_time_limit(960);
+        //return $this->render('mainBundle:Default:sync.html.twig');
+        if(!file_exists('../isSync')){
+            file_put_contents('../isSync', '1');
+        try{
+            if(file_exists('../tmpdata'))
+                $this->del_dir_files('../tmpdata');
+//        $_fr_news=false;$_ar_news=false;$_ar_rk_l1=false;$_fr_rk_l1=false;
+//        $_ar_rk_l2=false;$_fr_rk_l3=false;$_ar_rk_l3=false;$_fr_rk_l3=false;
+/*
+        $_fr_rk_l1=$this->download_fr_LeagueRankingContent('http://www.ftf.org.tn/fr/classement-ligue-i/','../tmpdata/v1/leagues/l1/fr_l1_rk_ca.html','../tmpdata/v1/leagues/l1/fr_l1_rk_cb.html');
+        $_ar_rk_l1=$this->download_ar_LeagueRankingContent('http://www.ftf.org.tn/ar2/classement-ligue-1-groupe-a/','../tmpdata/v1/leagues/l1/ar_l1_rk_ca.html','../tmpdata/v1/leagues/l1/ar_l1_rk_cb.html');
+
+            $_fr_rk_l2=$this->download_fr_LeagueRankingContent('http://www.ftf.org.tn/fr/ligue-2-group-b-resultats-et-classement/','../tmpdata/v1/leagues/l2/fr_l2_rk_ca.html','../tmpdata/v1/leagues/l2/fr_l2_rk_cb.html');
+            $_ar_rk_l2=$this->download_ar_LeagueRankingContent('http://www.ftf.org.tn/ar2/ligue-2-group-b-resultats-et-classement/','../tmpdata/v1/leagues/l2/ar_l2_rk_ca.html','../tmpdata/v1/leagues/l2/ar_l2_rk_cb.html');
+*/
+
+
+
+                    $_ar_news = $this->get_ar_news(1,$this->ar_n_tmp,$this->ar_nc_tmp);
+                    $_fr_news = $this->get_fr_news(1,$this->fr_n_tmp,$this->fr_nc_tmp);
+
+
+                        if($_ar_news && $_fr_news){
+
+                        $this->delete_old_news();
+                        $this->store_news_db($this->ar_n_tmp,$this->ar_nc_tmp);
+                        $this->store_news_db($this->fr_n_tmp,$this->fr_nc_tmp);
+
+                        unset($this->ar_n_tmp);
+                        unset($this->ar_nc_tmp);
+
+                        unset($this->fr_n_tmp);
+                        unset($this->fr_nc_tmp);
+
+                        $this->Move_Files('../tmpdata/v1/newsimages/','../data/v1/newsimages/');
+                        $this->Move_Files('../tmpdata/v1/mobilenews/','../data/v1/mobilenews/');
+
+                            echo 'sucess news <br>';
+/*
+                   if($_fr_rk_l1&&$_ar_rk_l1){
+                    $this->Move_Files('../tmpdata/v1/leagues/l1/','../data/v1/leagues/l1/');
+                    echo 'sucess league 1 <br>';
+
+                    if($_fr_rk_l2&&$_ar_rk_l2){
+                        $this->Move_Files('../tmpdata/v1/leagues/l2/','../data/v1/leagues/l2/');
+                        echo 'sucess league 2 <br>';
+                    }else{
+                        echo 'Sync league 2 failed !';
+                        unlink('../isSync');
+                    }
+
+                }else{
+                    echo 'Sync league 1 failed !';
+                    unlink('../isSync');
+                }
+*/
+
+        }else{
+            echo 'Sync news failed !';
+            unlink('../isSync');
+        }
+
+            unlink('../isSync');
+
+        } catch (\Exception $e){
+            echo $e->getMessage();
+            unlink('../isSync');
+        }
+
+        }else{
+            echo "Is Sync already !";
+        }
+
+
+
+    return null;
+    }
+
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------*/
+private function get_fr_news($lim,&$news_array,&$newscontent_array){
+    $sucess = true;
+        for ($i = 1; $i <= $lim; $i++) {
+        $html = $this->get_web_page('http://www.ftf.org.tn/fr/category/actualites/page/'.$i);
+
+        if($html != null){
+
+
+
+
+               $crawler=new Crawler($html);
+               for ($j = 1; $j <= 10;$j++) {
+
+        try{
+
+
+
+                $title=$crawler->filter('h2[class=post-title]>a')->eq($j-1)->text();
+//                echo $title . '<br>';
+
+                $imgurl=$crawler->filter('div[class=post-thumbnail]>a>img')->eq($j-1)->attr('src');
+//                echo $imgurl . '<br>';
+
+                $date=$crawler->filter('p[class=post-date]')->eq($j-1)->text();
+//                echo $date . '<br>';
+
+
+                $newurl=$crawler->filter('h2[class=post-title]>a')->eq($j-1)->attr('href');
+//                echo $newurl . '<br>';
+
+
+
+                    $new=new News();
+
+                    $new->setLang('fr');
+                    $new->setTitle($title);
+                    $new->setDate($date);
+
+                        $imgfilename= basename($imgurl);
+                        $lp= strrpos($imgfilename,'.');
+                        $extension = substr($imgfilename,$lp);
+
+                        $imgfilename = 'fr_'.$i.$j.$extension;
+
+                    $this->downloadImgFromUrl($imgurl,'../tmpdata/v1/newsimages/'.$imgfilename);
+
+
+                    $new->setImgurl('/data/v1/newsimages/'.$imgfilename);
+
+                    array_push($news_array,$new);
+
+
+
+
+
+
+
+                   //echo '<br> id = '.$new->getId().'<br>';
+
+
+            $newscontent = new NewsContent();
+            $newscontent->setWebSiteNewUrl($newurl);
+            $this->downloadNewContent($newurl,"../tmpdata/v1/mobilenews/fr_".$i.$j.".html");
+            $newscontent->setMobileNewUrl("/data/v1/mobilenews/fr_".$i.$j.".html");
+
+            array_push($newscontent_array,$newscontent);
+
+
+
+
+
+}catch (\Exception $e){
+echo $e->getMessage();
+$this->del_dir_files('../tmpdata/v1/newsimages');
+$this->del_dir_files('../tmpdata/v1/mobilenews');
+return false;
+}
+
+
+
+               }
+
+
+            }else{
+            $sucess = false;
+            $this->del_dir_files('../tmpdata/v1/newsimages');
+            $this->del_dir_files('../tmpdata/v1/mobilenews');
+        }
+
+
+
+    }
+return $sucess;
+
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    private function get_ar_news($lim,&$news_array,&$newscontent_array){
+        $sucess = true;
+        for ($i = 1; $i <= $lim; $i++) {
+            $html = $this->get_web_page('http://www.ftf.org.tn/ar2/category/actualites/page/'.$i);
+
+            if($html != null){
+
+
+
+
+                $crawler=new Crawler($html);
+                for ($j = 1; $j <= 10;$j++) {
+
+                    try{
+
+
+
+                        $title=$crawler->filter('h2[class=post-title]>a')->eq($j-1)->text();
+//                echo $title . '<br>';
+
+                        $imgurl=$crawler->filter('div[class=cat_image_tumb]>img')->eq($j-1)->attr('src');
+//                echo $imgurl . '<br>';
+
+                        $date=$crawler->filter('p[class=post-date]')->eq($j-1)->text();
+//                echo $date . '<br>';
+
+
+                        $newurl=$crawler->filter('h2[class=post-title]>a')->eq($j-1)->attr('href');
+//                echo $newurl . '<br>';
+
+
+
+                        $new=new News();
+
+                        $new->setLang('ar');
+                        $new->setTitle($title);
+                        $new->setDate($date);
+
+                        $imgfilename= basename($imgurl);
+                        $lp= strrpos($imgfilename,'.');
+                        $extension = substr($imgfilename,$lp);
+
+                        $imgfilename = 'ar_'.$i.$j.$extension;
+//                        if(!file_exists('../tmpdata/v1/newsimages/'.$imgfilename))
+//                        $this->downloadImgFromUrl($imgurl,'../tmpdata/v1/newsimages/'.$imgfilename);
+
+
+
+                        $new->setImgurl('/data/v1/newsimages/'.$imgfilename);
+
+                        array_push($news_array,$new);
+
+
+
+
+
+
+
+                        //echo '<br> id = '.$new->getId().'<br>';
+
+
+                        $newscontent = new NewsContent();
+                        $newscontent->setWebSiteNewUrl($newurl);
+                        $this->downloadNewContent($newurl,"../tmpdata/v1/mobilenews/ar_".$i.$j.".html");
+                        $newscontent->setMobileNewUrl("/data/v1/mobilenews/ar_".$i.$j.".html");
+
+                        array_push($newscontent_array,$newscontent);
+
+
+
+
+
+                    }catch (\Exception $e){
+                        echo $e->getMessage();
+                        $this->del_dir_files('../tmpdata/v1/newsimages');
+                        $this->del_dir_files('../tmpdata/v1/mobilenews');
+                        return false;
+                    }
+
+
+
+                }
+
+
+            }else{
+                $sucess = false;
+                $this->del_dir_files('../tmpdata/v1/newsimages');
+                $this->del_dir_files('../tmpdata/v1/mobilenews');
+            }
+
+
+
+        }
+        return $sucess;
+
+    }
+
+    /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+private function downloadNewContent($newurl,$outFileName){
+    $doc = null;
+
+    try{
+        $html = file_get_contents($newurl);
+
+        $crawler=new Crawler($html);
+        $content=$crawler->filter('article')->html();
+        $doc = "<html><head><meta charset=\"UTF-8\"></head><style>
+                    img{display:block;width:100%;height:auto;margin : 0 auto;} 
+                    p{font-size:30;}
+                    h1{font-size:50;}
+                    div.pf-content{font-size:30;}
+                    iframe{display:block;width:100%;height:50%;margin : 10 auto;}
+                   </style>".$content."<script  type=\"text/javascript\">"
+            . "javascript:document.getElementsByClassName('juiz_sps_links_list')[0].innerHTML=''; 
+                                            document.getElementsByClassName('printfriendly pf-alignright')[0].innerHTML='';
+                                            document.getElementsByClassName('screen-reader-text juiz_sps_maybe_hidden_text')[0].innerHTML='';"
+            . "</script></html>";
+
+        $lp= strrpos($outFileName,'/');
+        $dir = substr($outFileName,0,$lp);
+
+        if (! is_dir($dir)) {
+            mkdir($dir, 0777, true);
+        }
+
+        file_put_contents($outFileName, $doc);
+    }catch (\Exception $e){
+       echo ' <h1> Error while loading page !</h1>';
+        //return null;
+    }
+
+//return $doc;
+}
+
+
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    private function download_fr_LeagueRankingContent($LRurl,$lcaFileName,$lcbFileName){
+        $doc = null;
+
+        try{
+            $html = file_get_contents($LRurl);
+
+            $crawler=new Crawler($html);
+            $content=$crawler->filter('div[class=cp-table-wrap]');
+            $lca = $content->eq(0)->html();
+            $lcb = $content->eq(1)->html();
+            $patch = '<head><meta charset="UTF-8"></head><style>
+            html{background-color:red;color:white;}
+                   
+					table{width:100%;height:100%;border-collapse:collapse;}	
+					
+					td:not(:nth-child(3)) {text-align:center;}
+                    
+                    td,th{font-size:45;border: 2px solid black;}
+					
+					caption{font-size:45;font-weight: bold;margin-bottom:50;}
+					
+					a{color:white;text-decoration:none;}
+					
+					img{width:50;height:50;}
+					
+					tr:nth-child(1) > th:nth-child(n+1):nth-child(-n+3){
+            border:none;
+					}
+                   </style>';
+
+            $lca = '<html>'.$patch.$lca.'</html>';
+
+            $lcb = '<html>'.$patch.$lcb.'</html>';
+
+            $lp= strrpos($lcaFileName,'/');
+            $dir = substr($lcaFileName,0,$lp);
+
+            if (! is_dir($dir)) {
+                mkdir($dir, 0777, true);
+            }
+
+            $lp= strrpos($lcbFileName,'/');
+            $dir = substr($lcbFileName,0,$lp);
+
+            if (! is_dir($dir)) {
+                mkdir($dir, 0777, true);
+            }
+
+            file_put_contents($lcaFileName, $lca);
+            file_put_contents($lcbFileName, $lcb);
+            return true;
+        }catch (\Exception $e){
+            echo $e->getMessage();
+            echo ' <h1> Error while loading page !</h1>';
+            return false;
+        }
+
+    }
+
+    /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+    private function download_ar_LeagueRankingContent($LRurl,$lcaFileName,$lcbFileName){
+        $doc = null;
+
+        try{
+            $html = file_get_contents($LRurl);
+
+            $crawler=new Crawler($html);
+            $content=$crawler->filter('div[class=cp-table-wrap]');
+            $lca = $content->eq(0)->html();
+            $lcb = $content->eq(1)->html();
+            $patch = '<head><meta charset="UTF-8"></head><style>
+                    html{background-color:red;color:white;}
+                   
+					table{width:100%;height:100%;border-collapse:collapse;}	
+					
+					td:not(:nth-child(8)) {text-align:center;}
+                    
+                    td:nth-child(8){text-align:right;}
+                    
+                    td,th{font-size:45;border: 2px solid black;}
+					
+					caption{font-size:45;font-weight: bold;margin-bottom:50;}
+					
+					a{color:white;text-decoration:none;}
+					
+					img{width:50;height:50;}
+					
+					tr:nth-child(1) > th:nth-child(n+8):nth-child(-n+10){
+                    border:none;
+					}
+                   </style>';
+
+            $lca = '<html>'.$patch.$lca.'</html>';
+
+            $lcb = '<html>'.$patch.$lcb.'</html>';
+
+            $lp= strrpos($lcaFileName,'/');
+            $dir = substr($lcaFileName,0,$lp);
+
+            if (! is_dir($dir)) {
+                mkdir($dir, 0777, true);
+            }
+
+            $lp= strrpos($lcbFileName,'/');
+            $dir = substr($lcbFileName,0,$lp);
+
+            if (! is_dir($dir)) {
+                mkdir($dir, 0777, true);
+            }
+
+            file_put_contents($lcaFileName, $lca);
+            file_put_contents($lcbFileName, $lcb);
+        }catch (\Exception $e){
+            echo $e->getMessage();
+            echo ' <h1> Error while loading page !</h1>';
+            return false;
+        }
+
+        return true;
+    }
+
+
+    /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+    function downloadImgFromUrl($url, $outFileName)
+    {
+        $lp= strrpos($outFileName,'/');
+        $dir = substr($outFileName,0,$lp);
+
+        if (! is_dir($dir)) {
+            mkdir($dir, 0777, true);
+        }
+
+
+        if(is_file($url)) {
+            copy($url, $outFileName);
+        } else {
+            $options = array(
+                CURLOPT_FILE    => fopen($outFileName, 'w'),
+                CURLOPT_TIMEOUT =>  28800, // set this to 8 hours so we dont timeout on big files
+                CURLOPT_URL     => $url
+            );
+
+            $ch = curl_init();
+            curl_setopt_array($ch, $options);
+            curl_exec($ch);
+            curl_close($ch);
+
+            $image = new SimpleImage();
+            $image->load($outFileName);
+            $image->resize(300, 150);
+            $image->save($outFileName);
+        }
+    }
+
+    /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+    private function get_web_page($url){
+
+
+            try{
+                $html = file_get_contents($url);
+            }catch (\Exception $e){
+                $html = null;
+            }
+    return $html;
+
+
+    }
+
+    /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+    private function Move_Files($source,$destination){
+//        $source = "source/";
+//        $destination = "destination/";
+
+        if (!is_dir($destination)) {
+            mkdir($destination, 0777, true);
+        }
+    // Get array of all source files
+        $files = scandir($source);
+// Identify directories
+// Cycle through all source files
+    foreach ($files as $file) {
+        if (in_array($file, array(".",".."))) continue;
+        // If we copied this successfully, mark it for deletion
+        if (copy($source.$file, $destination.$file)) {
+            $delete[] = $source.$file;
+        }
+    }
+// Delete all successfully-copied files
+    foreach ($delete as $file) {
+        unlink($file);
+    }
+}
+
+    /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+private  function  del_dir_files($dir){
+if(file_exists($dir)){
+    foreach(glob("{$dir}/*") as $file)
+    {
+        if(is_file($file)) {
+            unlink($file);
+            } else {
+            $this->del_dir_files($file);
+        }
+    }
+    rmdir($dir);
+}
+}
+
+
+    /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+    private function delete_old_news(){
+        $em = $this->getDoctrine()->getManager();
+        $connection = $em->getConnection();
+        $statement = $connection->exec('
+        DELETE FROM news;
+        ');
+
+        $connection->exec('ALTER TABLE news AUTO_INCREMENT = 1;');
+
+        $this->del_dir_files('../data/v1/newsimages');
+        $this->del_dir_files('../data/v1/mobilenews');
+    }
+
+    private function store_news_db($news,$news_c){
+        $end = sizeof($news);
+        for($i=0;$i<$end;$i++){
+
+            $em=$this->getDoctrine()->getManager();
+            $em->persist($news[$i]);//exec sql
+            $em->flush();//commit;
+
+          $newscontentid = $em->getRepository(News::class)
+                    ->findOneById($news[$i]->getId());
+          $news_c[$i]->setId($newscontentid);
+
+          $em->persist($news_c[$i]);//exec sql
+          $em->flush();//commit;
+        }
+
+    }
+
+    /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+}

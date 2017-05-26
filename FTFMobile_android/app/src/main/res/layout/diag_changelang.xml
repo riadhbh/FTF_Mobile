@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#3c4147"
+    android:orientation="vertical">
+
+
+    <RadioGroup
+        android:id="@+id/setOfLangs"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp">
+
+        <RadioButton
+            android:id="@+id/fr_radio_choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="1"
+            android:text="Français"
+            android:textColor="#FFFFFF"
+            android:textSize="18dp" />
+
+        <RadioButton
+            android:id="@+id/ar_radio_choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:text="العربية"
+            android:textColor="#FFFFFF"
+            android:textSize="18dp" />
+
+
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="50dp">
+
+        <LinearLayout
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/langdiag_btn_no"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:background="@drawable/no"
+                android:scaleType="fitXY" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/langdiag_btn_yes"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:background="@drawable/yes"
+                android:scaleType="fitXY" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

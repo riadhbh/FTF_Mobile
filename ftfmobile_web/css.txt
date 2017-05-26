@@ -1,0 +1,71 @@
+
+						div>a>img{display:none;}
+						img { height: 50%;width:auto }
+						div.ligue-title{font-size:20px;font-weight:bold;};
+                        div.match_cont{background-color:white;}
+						div.match_eq_time{color:black;font-weight: bold;font-size:25px;}
+						div.match_res{color:black;font-size:35px;}
+                        html{height: auto;background-color:white;}
+                        a{text-decoration:none;font-weight: bold;color:black;pointer-events: none;}
+						div.leTous{height:auto;}
+						body{display:block;color:transparent;width:auto}
+						
+						.journee-title{display:none;}
+						.ligue-title{display:none;}
+						.wp-pagenavi{display:none;}
+						.ligue_groupe{display:none;}
+						.header_classement{display:none;}
+						.archive_saison_title{display:none;}
+						.archive_saison{display:none;}
+						
+						.leTous{
+							padding:10px;
+						}
+						.match_cont {
+						border-top: solid 2px grey;
+						border-bottom: solid 2px grey;
+						min-height: 35px;
+						height:10%;
+						padding:20px 0px 0px 0px; 
+						text-align: center;
+						}
+
+
+						.date_match_cont {
+							background-color: red;
+						color: white;
+						font-weight: bold;
+						padding: 5px;
+						font-size:35px;
+						}
+
+						 
+
+						.match_eq_time {
+							 float: left;
+							font-weight: bold;
+						}
+
+						.match_eq_flag {
+							float:left;
+							width:10%;
+							}
+
+						.match_eq_title {
+							float:left;  
+							width:25%;
+							font-size:30px;
+						}
+						.match_res {
+						float: left;
+						width: 10%;
+						font-weight: bold;
+						}
+						
+						.plus_details {
+						float: right;
+						width: 5%;
+						font-size: 23px;
+						font-weight: bold;
+						text-align: right;
+						}
