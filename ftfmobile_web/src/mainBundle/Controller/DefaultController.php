@@ -1534,7 +1534,7 @@ try{
     {
 
         $transport = \Swift_SmtpTransport::newInstance("smtp.gmail.com",465,"ssl")
-        ->setUsername("ftfmobile@gmail.com")->setPassword("qwerty_24");
+        ->setUsername("mail@gmail.com")->setPassword("password");
 
         $mailer = \Swift_Mailer::newInstance($transport);
 
