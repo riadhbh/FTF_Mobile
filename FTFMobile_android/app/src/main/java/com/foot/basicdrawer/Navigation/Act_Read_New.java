@@ -292,8 +292,8 @@ public class Act_Read_New extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if(URLUtil.isValidUrl(webview.getUrl())){
-            webview.goBack();
-//            webview.loadUrl("about:blank");
+//          webview.goBack();
+//          webview.loadUrl("about:blank");
             webview.loadData(content, "text/html; charset=UTF-8", null);
 
 //                    Toast.makeText(getBaseContext(),webview.getUrl()+" Go Back",Toast.LENGTH_LONG).show();

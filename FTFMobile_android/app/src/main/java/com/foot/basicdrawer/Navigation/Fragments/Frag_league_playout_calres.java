@@ -24,8 +24,6 @@ import com.foot.basicdrawer.R;
 import java.util.ArrayList;
 
 import static com.foot.basicdrawer.ToolBox.AppSettings.*;
-import static com.foot.basicdrawer.ToolBox.FrequentlyUsed.ConfigBrowser;
-import static com.foot.basicdrawer.ToolBox.LanguageChanger.*;
 import static com.foot.basicdrawer.Network.Server_Host_Constant.APISite;
 import static com.foot.basicdrawer.ToolBox.FrequentlyUsed.loadwebPage;
 
@@ -54,7 +52,7 @@ public class Frag_league_playout_calres extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_frag_league_playout_calres, container, false);
+        return inflater.inflate(R.layout.fragment_league_playout_calres, container, false);
     }
 
     @Override

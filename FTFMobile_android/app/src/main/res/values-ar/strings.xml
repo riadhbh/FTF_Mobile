@@ -67,7 +67,7 @@
     <string name="link_copied">تم نسخ الرابط !</string>
 
     <string name="pbconn_website">مشكلة في اتصال بالموقع</string>
-    <string name="nondispo_website">لا يمكن الإتصال بالموقع في الوقت الحاضر, يرجى اعادة المحاولة لاحقا.</string>
+    <string name="nondispo_website">لا يمكن الإتصال بالخادم في الوقت الحاضر, يرجى اعادة المحاولة لاحقا.</string>
 
     <string name="badurl_title">الرابط غير صالح</string>
     <string name="badurl_msg">نعتذر ,الرابط غير صالح!</string>

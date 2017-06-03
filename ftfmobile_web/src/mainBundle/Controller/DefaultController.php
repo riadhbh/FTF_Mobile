@@ -74,7 +74,7 @@ try{
        echo json_encode($res);
 }
 
-catch(Exception $e)
+catch(\Exception $e)
 {
 $this->sendmail($e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
 }
@@ -164,7 +164,7 @@ try{
 //
 //        echo $json;
 
-}catch(Exception $e){
+}catch(\Exception $e){
 $this->sendmail( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
 }
 
@@ -201,7 +201,7 @@ $this->sendmail( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
             //echo 'found !';
         }
 
-     }catch(Exception $e){
+     }catch(\Exception $e){
          $this->sendmail( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
      }
     }
@@ -433,7 +433,7 @@ $this->sendmail( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
 
 
 
-        }catch(Exception $e){
+        }catch(\Exception $e){
             $this->sendmail( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
         }
         return null;
@@ -639,7 +639,7 @@ $this->sendmail( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
             //echo $day;
             //            echo $html;
             }
-catch(Exception $e){
+catch(\Exception $e){
 $this->sendmail( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
 }
 
@@ -756,7 +756,7 @@ $this->sendmail( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
 
 
 
-        }catch(Exception $e){
+        }catch(\Exception $e){
             $this->sendmail( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
         }
 
@@ -844,7 +844,7 @@ $this->sendmail( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
 //            echo $l2_a.'<br>';
 //            echo $l2_b.'<br>';
 
-        }catch (Exception $e){
+        }catch (\Exception $e){
 
         }
     }
@@ -966,7 +966,7 @@ $this->sendmail( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
 */
 
 
-        }catch(Exception $e){
+        }catch(\Exception $e){
             $this->sendmail( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
         }
     return null;
@@ -1076,7 +1076,7 @@ private function get_fr_news($url,$cat,$lim,&$news_array,&$newscontent_array){
 
 
     }
-    }catch (Exception $e){
+    }catch (\Exception $e){
         $this->sendmail( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
         $this->del_dir_files($newsimages_tmpdata_dir);
         $this->del_dir_files($mobilenews_tmpdata_dir);
@@ -1187,7 +1187,7 @@ return $sucess;
 
 
         }
-        }catch (Exception $e){
+        }catch (\Exception $e){
             $this->sendmail( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
             $this->del_dir_files($newsimages_tmpdata_dir);
             $this->del_dir_files($mobilenews_tmpdata_dir);
@@ -1232,7 +1232,7 @@ private function downloadNewContent($newurl,$outFileName){
         }
 
         file_put_contents($outFileName, $doc);
-    }catch (Exception $e){
+    }catch (\Exception $e){
         $this->sendmail( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
         //return null;
     }
@@ -1357,7 +1357,7 @@ private function downloadNewContent($newurl,$outFileName){
 
 
             return true;
-        }catch (Exception $e){
+        }catch (\Exception $e){
             $this->sendmail( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
             return false;
         }
@@ -1400,12 +1400,12 @@ private function downloadNewContent($newurl,$outFileName){
             $image->resize(300, 150);
             $image->save($outFileName);
 
-            }catch(\Exception $e){
+            }catch(\Exception $f){
                 return;
 
             }
         }
-       }catch (Exception $e){
+       }catch (\Exception $e){
            $this->sendmail( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
        }
        }
@@ -1417,7 +1417,7 @@ private function downloadNewContent($newurl,$outFileName){
 
             try{
                 return file_get_contents($url);
-            }catch (Exception $e){
+            }catch (\Exception $e){
                 $this->sendmail( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
             }
 
@@ -1449,7 +1449,7 @@ try{
     foreach ($delete as $file) {
         unlink($file);
     }
-}catch (Exception $e){
+}catch (\Exception $e){
     $this->sendmail( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
 }
     }
@@ -1468,7 +1468,7 @@ try{
     }
     rmdir($dir);
 }
-}catch (Exception $e){
+}catch (\Exception $e){
     $this->sendmail( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
 }
 
@@ -1500,7 +1500,7 @@ try{
 
         $this->del_dir_files('../data/v1/newsimages/'.$cat.'/'.$lang);
         $this->del_dir_files('../data/v1/mobilenews/'.$cat.'/'.$lang);
-}catch (Exception $e){
+}catch (\Exception $e){
 //    $this->sendmail( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
 }
 
@@ -1522,7 +1522,7 @@ try{
           $em->persist($news_c[$i]);//exec sql
           $em->flush();//commit;
         }
-}catch (Exception $e){
+}catch (\Exception $e){
     $this->sendmail( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
 }
 

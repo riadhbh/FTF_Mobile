@@ -1,53 +1,53 @@
-usr/local/bin/php -q /home/ststechm/public_html/FTF_Crons/News/cron_syncNews_ar_ad.php
-usr/local/bin/php -q /home/ststechm/public_html/FTF_Crons/News/cron_syncNews_fr_ad.php
-usr/local/bin/php -q /home/ststechm/public_html/FTF_Crons/News/cron_syncNews_ar_all.php
-usr/local/bin/php -q /home/ststechm/public_html/FTF_Crons/News/cron_syncNews_fr_all.php
-usr/local/bin/php -q /home/ststechm/public_html/FTF_Crons/News/cron_syncNews_ar_ntd.php
-usr/local/bin/php -q /home/ststechm/public_html/FTF_Crons/News/cron_syncNews_fr_ntd.php
-usr/local/bin/php -q /home/ststechm/public_html/FTF_Crons/News/cron_syncNews_ar_l1.php
-usr/local/bin/php -q /home/ststechm/public_html/FTF_Crons/News/cron_syncNews_fr_l1.php
-usr/local/bin/php -q /home/ststechm/public_html/FTF_Crons/News/cron_syncNews_ar_l2.php
-usr/local/bin/php -q /home/ststechm/public_html/FTF_Crons/News/cron_syncNews_fr_l2.php
-usr/local/bin/php -q /home/ststechm/public_html/FTF_Crons/News/cron_syncNews_ar_l3.php
-usr/local/bin/php -q /home/ststechm/public_html/FTF_Crons/News/cron_syncNews_fr_l3.php
+/usr/bin/php -q /home/ststechm/public_html/FTF_Crons/News/cron_syncNews_ar_ad.php
+/usr/bin/php -q /home/ststechm/public_html/FTF_Crons/News/cron_syncNews_fr_ad.php
+/usr/bin/php -q /home/ststechm/public_html/FTF_Crons/News/cron_syncNews_ar_all.php
+/usr/bin/php -q /home/ststechm/public_html/FTF_Crons/News/cron_syncNews_fr_all.php
+/usr/bin/php -q /home/ststechm/public_html/FTF_Crons/News/cron_syncNews_ar_ntd.php
+/usr/bin/php -q /home/ststechm/public_html/FTF_Crons/News/cron_syncNews_fr_ntd.php
+/usr/bin/php -q /home/ststechm/public_html/FTF_Crons/News/cron_syncNews_ar_l1.php
+/usr/bin/php -q /home/ststechm/public_html/FTF_Crons/News/cron_syncNews_fr_l1.php
+/usr/bin/php -q /home/ststechm/public_html/FTF_Crons/News/cron_syncNews_ar_l2.php
+/usr/bin/php -q /home/ststechm/public_html/FTF_Crons/News/cron_syncNews_fr_l2.php
+/usr/bin/php -q /home/ststechm/public_html/FTF_Crons/News/cron_syncNews_ar_l3.php
+/usr/bin/php -q /home/ststechm/public_html/FTF_Crons/News/cron_syncNews_fr_l3.php
 
 
-usr/local/bin/php -q /home/ststechm/public_html/FTF_Crons/League1/CalRes/cron_syncCalRes_ar_l1_grpa.php
-usr/local/bin/php -q /home/ststechm/public_html/FTF_Crons/League1/CalRes/cron_syncCalRes_ar_l1_grpb.php
-usr/local/bin/php -q /home/ststechm/public_html/FTF_Crons/League1/CalRes/cron_syncCalRes_ar_l1_poff.php
-usr/local/bin/php -q /home/ststechm/public_html/FTF_Crons/League1/CalRes/cron_syncCalRes_ar_l1_pout.php
-usr/local/bin/php -q /home/ststechm/public_html/FTF_Crons/League1/CalRes/cron_syncCalRes_fr_l1_grpa.php
-usr/local/bin/php -q /home/ststechm/public_html/FTF_Crons/League1/CalRes/cron_syncCalRes_fr_l1_grpb.php
-usr/local/bin/php -q /home/ststechm/public_html/FTF_Crons/League1/CalRes/cron_syncCalRes_fr_l1_poff.php
-usr/local/bin/php -q /home/ststechm/public_html/FTF_Crons/League1/CalRes/cron_syncCalRes_fr_l1_pout.php
+/usr/bin/php -q /home/ststechm/public_html/FTF_Crons/League1/CalRes/cron_syncCalRes_ar_l1_grpa.php
+/usr/bin/php -q /home/ststechm/public_html/FTF_Crons/League1/CalRes/cron_syncCalRes_ar_l1_grpb.php
+/usr/bin/php -q /home/ststechm/public_html/FTF_Crons/League1/CalRes/cron_syncCalRes_ar_l1_poff.php
+/usr/bin/php -q /home/ststechm/public_html/FTF_Crons/League1/CalRes/cron_syncCalRes_ar_l1_pout.php
+/usr/bin/php -q /home/ststechm/public_html/FTF_Crons/League1/CalRes/cron_syncCalRes_fr_l1_grpa.php
+/usr/bin/php -q /home/ststechm/public_html/FTF_Crons/League1/CalRes/cron_syncCalRes_fr_l1_grpb.php
+/usr/bin/php -q /home/ststechm/public_html/FTF_Crons/League1/CalRes/cron_syncCalRes_fr_l1_poff.php
+/usr/bin/php -q /home/ststechm/public_html/FTF_Crons/League1/CalRes/cron_syncCalRes_fr_l1_pout.php
 
 
-usr/local/bin/php -q /home/ststechm/public_html/FTF_Crons/League1/Ranking/cron_syncRanking_ar_l1.php
-usr/local/bin/php -q /home/ststechm/public_html/FTF_Crons/League1/Ranking/cron_syncRanking_fr_l1.php
-usr/local/bin/php -q /home/ststechm/public_html/FTF_Crons/League1/Ranking/cron_syncRanking_ar_l1_poff.php
-usr/local/bin/php -q /home/ststechm/public_html/FTF_Crons/League1/Ranking/cron_syncRanking_ar_l1_pout.php
-usr/local/bin/php -q /home/ststechm/public_html/FTF_Crons/League1/Ranking/cron_syncRanking_fr_l1_poff.php
-usr/local/bin/php -q /home/ststechm/public_html/FTF_Crons/League1/Ranking/cron_syncRanking_fr_l1_pout.php
+/usr/bin/php -q /home/ststechm/public_html/FTF_Crons/League1/Ranking/cron_syncRanking_ar_l1.php
+/usr/bin/php -q /home/ststechm/public_html/FTF_Crons/League1/Ranking/cron_syncRanking_fr_l1.php
+/usr/bin/php -q /home/ststechm/public_html/FTF_Crons/League1/Ranking/cron_syncRanking_ar_l1_poff.php
+/usr/bin/php -q /home/ststechm/public_html/FTF_Crons/League1/Ranking/cron_syncRanking_ar_l1_pout.php
+/usr/bin/php -q /home/ststechm/public_html/FTF_Crons/League1/Ranking/cron_syncRanking_fr_l1_poff.php
+/usr/bin/php -q /home/ststechm/public_html/FTF_Crons/League1/Ranking/cron_syncRanking_fr_l1_pout.php
 
 
-usr/local/bin/php -q /home/ststechm/public_html/FTF_Crons/League2/CalRes/cron_syncCalRes_ar_l2_grpa.php
-usr/local/bin/php -q /home/ststechm/public_html/FTF_Crons/League2/CalRes/cron_syncCalRes_ar_l2_grpb.php
-usr/local/bin/php -q /home/ststechm/public_html/FTF_Crons/League2/CalRes/cron_syncCalRes_fr_l2_grpa.php
-usr/local/bin/php -q /home/ststechm/public_html/FTF_Crons/League2/CalRes/cron_syncCalRes_fr_l2_grpb.php
+/usr/bin/php -q /home/ststechm/public_html/FTF_Crons/League2/CalRes/cron_syncCalRes_ar_l2_grpa.php
+/usr/bin/php -q /home/ststechm/public_html/FTF_Crons/League2/CalRes/cron_syncCalRes_ar_l2_grpb.php
+/usr/bin/php -q /home/ststechm/public_html/FTF_Crons/League2/CalRes/cron_syncCalRes_fr_l2_grpa.php
+/usr/bin/php -q /home/ststechm/public_html/FTF_Crons/League2/CalRes/cron_syncCalRes_fr_l2_grpb.php
 
 
-usr/local/bin/php -q /home/ststechm/public_html/FTF_Crons/League2/Ranking/cron_syncRanking_ar_l2.php
-usr/local/bin/php -q /home/ststechm/public_html/FTF_Crons/League2/Ranking/cron_syncRanking_fr_l2.php
+/usr/bin/php -q /home/ststechm/public_html/FTF_Crons/League2/Ranking/cron_syncRanking_ar_l2.php
+/usr/bin/php -q /home/ststechm/public_html/FTF_Crons/League2/Ranking/cron_syncRanking_fr_l2.php
 
 
-usr/local/bin/php -q /home/ststechm/public_html/FTF_Crons/Multimedia/cron_syncNews_ar_photos.php
-usr/local/bin/php -q /home/ststechm/public_html/FTF_Crons/Multimedia/cron_syncNews_ar_videos.php
-usr/local/bin/php -q /home/ststechm/public_html/FTF_Crons/Multimedia/cron_syncNews_fr_photos.php
-usr/local/bin/php -q /home/ststechm/public_html/FTF_Crons/Multimedia/cron_syncNews_fr_videos.php
+/usr/bin/php -q /home/ststechm/public_html/FTF_Crons/Multimedia/cron_syncNews_ar_photos.php
+/usr/bin/php -q /home/ststechm/public_html/FTF_Crons/Multimedia/cron_syncNews_ar_videos.php
+/usr/bin/php -q /home/ststechm/public_html/FTF_Crons/Multimedia/cron_syncNews_fr_photos.php
+/usr/bin/php -q /home/ststechm/public_html/FTF_Crons/Multimedia/cron_syncNews_fr_videos.php
 
 
-usr/local/bin/php -q /home/ststechm/public_html/FTF_Crons/NatTeam/cron_syncNatTeam_ar.php
-usr/local/bin/php -q /home/ststechm/public_html/FTF_Crons/NatTeam/cron_syncNatTeam_fr.php
+/usr/bin/php -q /home/ststechm/public_html/FTF_Crons/NatTeam/cron_syncNatTeam_ar.php
+/usr/bin/php -q /home/ststechm/public_html/FTF_Crons/NatTeam/cron_syncNatTeam_fr.php
 
 
-usr/local/bin/php -q /home/ststechm/public_html/FTF_Crons/GenCal/cron_syncGenCal.php
+/usr/bin/php -q /home/ststechm/public_html/FTF_Crons/GenCal/cron_syncGenCal.php

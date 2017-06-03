@@ -66,7 +66,7 @@
 
 
     <string name="pbconn_website">Problème de connexion au site</string>
-    <string name="nondispo_website">Le site web est injoignable pour le moment, veuillez réessayer ultérieurement.</string>
+    <string name="nondispo_website">Le serveur web est injoignable pour le moment, veuillez réessayer ultérieurement.</string>
     <string name="link_copied">Le lien a été copié !</string>
 
     <!-- TODO: Remove or change this placeholder text -->
