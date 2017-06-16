@@ -12,9 +12,16 @@ public class Server_Host_Constant {
 public static final String APIServHost="ftfmobile.000webhostapp.com";//"192.168.137.1";//"ftfmobile.sts-tech.tn";//"169.254.216.207";//10.0.2.2
 private static final String APIServProtocol="http";
 public static final String APISite=APIServProtocol+"://"+APIServHost+"/ftfmobile";
+
+
+
+
+
+
+
+
+/*
 public static Document NewsDoc=null;
-
-
 public static final String WebsiteHost="www.ftf.org.tn";
 private static final String WebsiteProtocol="http";
 public static final String MyWebsite=WebsiteProtocol+"://"+WebsiteHost;
@@ -33,8 +40,6 @@ private static String NewsLink =MyWebsite+"/fr/category/actualites/";
 
     }
 
-
-/*
     public static String getHtml(String url) throws IOException {
         // Build and set timeout values for the request.
         URLConnection connection = (new URL(url)).openConnection();

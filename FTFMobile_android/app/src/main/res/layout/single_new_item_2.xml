@@ -44,7 +44,7 @@
                 android:gravity="bottom"
                 android:text="date"
                 android:textColor="@android:color/black"
-                android:textDirection="anyRtl" />
+                android:textDirection="locale" />
         </LinearLayout>
 
         <LinearLayout

@@ -60,9 +60,9 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: '%smtp%'
-    host: '%smtp.yandex.com%'
-    username: '%mail%'
-    password: '%password%'
+    transport: smtp
+    host: smtp.yandex.com
+    username: ftfmobile@yandex.com
+    password: qwerty_24
     spool: { type: memory }
-    encryption: '%ssl%'
+    encryption: ssl

@@ -111,10 +111,17 @@ public class Act_Read_New extends AppCompatActivity {
 
                 if(new_id!=null)
                     if(new_id.length()>0){
+                        if(URLUtil.isValidUrl(webview.getUrl())){
+                            swipeRefresh.setRefreshing(true);
+                            String url = webview.getUrl();
+                            webview.loadUrl(url);
+                            swipeRefresh.setRefreshing(false);
+                        }else{
                         swipeRefresh.setRefreshing(true);
                         getNew(new_id);
                         swipeRefresh.setRefreshing(false);
-                    }else{
+                        }
+                        }else{
                         swipeRefresh.setRefreshing(false);
                         BadUrlDiag();
                     }else{
@@ -193,14 +200,13 @@ public class Act_Read_New extends AppCompatActivity {
 //                                                    outputStream = openFileOutput(name, Context.MODE_PRIVATE);
 //                                                    outputStream.write(response);
 
-                                                     content = new String(response);
-                                                    String textOfHtmlString = Jsoup.parse(content).text();
+                                                    content = new String(response);
+//                                                    String textOfHtmlString = Jsoup.parse(content).text();
 
 
-                                                    if(!textOfHtmlString.equals(content)){
-                                                        webview.loadUrl("about:blank");
+//                                                    if(!textOfHtmlString.equals(content)){
                                                         webview.loadData(content, "text/html; charset=UTF-8", null);
-                                                    }
+//                                                    }
 //                                                    outputStream.close();
 //                                                    Toast.makeText(getBaseContext(), "Download complete.", Toast.LENGTH_LONG).show();
                                                 }
@@ -292,13 +298,16 @@ public class Act_Read_New extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if(URLUtil.isValidUrl(webview.getUrl())){
-//          webview.goBack();
-//          webview.loadUrl("about:blank");
-            webview.loadData(content, "text/html; charset=UTF-8", null);
+            webview.goBack();
+//            webview.loadUrl("about:blank");
+//            webview.loadData(content, "text/html; charset=UTF-8", null);
 
 //                    Toast.makeText(getBaseContext(),webview.getUrl()+" Go Back",Toast.LENGTH_LONG).show();
-        }else
+        }else{
+            webview.loadUrl("about:blank");
             super.onBackPressed();
 //            onBackPressed();
+
+    }
     }
 }

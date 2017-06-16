@@ -239,8 +239,9 @@ private void LisTypeDiag(){
                 public void onClick(DialogInterface dialog, int which) {
 
                     if(which!=Old_ListTypeIndex){
-                        setListType(which);
-                        update_DB_ListType(getBaseContext());
+                        setListType_controller(getBaseContext(),which);
+
+                        tv_listType.setText(items[which]);
                         /*
                         String lang="fr";
                         if(which==0)
@@ -294,9 +295,9 @@ builder2.create().show();
                             if(which==0)
                                 lang="ar";
 
-                            setLang(lang);
-                            update_DB_Lang(getBaseContext());
-                            LanguageChanger.setLocale(getBaseContext(),lang);
+                            setLang_controller(getBaseContext(),lang);
+
+
                             Reload(Act_Settings.this);
                         }
 //dismissing the dialog when the user makes a selection.

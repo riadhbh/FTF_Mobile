@@ -28,8 +28,7 @@ import static com.foot.basicdrawer.Network.Server_Host_Constant.*;
 import static com.foot.basicdrawer.SQLite.DB_Queries.*;
 import static com.foot.basicdrawer.ToolBox.AppSettings.*;
 import static com.foot.basicdrawer.ToolBox.FrequentlyUsed.*;
-import static com.foot.basicdrawer.ToolBox.LanguageChanger.*;
-import static com.foot.basicdrawer.ToolBox.AppSettings.*;
+
 /**
  * Created by riadh on 2/12/2017.
  */
@@ -47,10 +46,12 @@ public class Splash extends Activity {
 
         setContentView(R.layout.activity_splash);
         avi=(AVLoadingIndicatorView)findViewById(R.id.avi);
-        load_DB_Lang(getBaseContext());
-        load_DB_ListType(getBaseContext());
+        //load_DB_Lang(getBaseContext());
+        //load_DB_ListType(getBaseContext());
 
-        LanguageChanger.setLocale(getBaseContext(),getLang());
+        getLang_controller(getBaseContext());
+        getListType_controller(getBaseContext());
+
 
 
 

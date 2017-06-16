@@ -31,11 +31,12 @@
             android:padding="5dp">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:text="@string/language"
                 android:textColor="@android:color/black"
+                android:textDirection="locale"
                 android:textSize="14sp" />
 
             <TextView
@@ -43,8 +44,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
+                android:paddingRight="5dp"
                 android:text="@string/langName"
-                android:textColor="#808080"
+                android:textColor="#000000"
+                android:textDirection="locale"
                 android:textSize="12sp"
                 android:textStyle="italic" />
 
@@ -68,11 +71,12 @@
             android:padding="5dp">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:text="@string/_list_format"
                 android:textColor="@android:color/black"
+                android:textDirection="locale"
                 android:textSize="14sp" />
 
             <TextView
@@ -80,7 +84,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:textColor="#808080"
+                android:paddingRight="5dp"
+                android:textColor="#000000"
+                android:textDirection="locale"
                 android:textSize="12sp"
                 android:textStyle="italic" />
 
