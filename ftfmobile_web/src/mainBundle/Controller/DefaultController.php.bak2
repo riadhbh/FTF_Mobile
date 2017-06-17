@@ -34,10 +34,8 @@ class DefaultController extends Controller
 
     private $ar_n_tmp= array();
     private $ar_nc_tmp=array();
-	
-	/*------------------------------------------------------------------------------------------------------------------------------------------------------*/
-    private $allowed_sync_addrs = array ("41.231.55.16");//("127.0.0.1","::1","localhost");
-	/*------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 
 
@@ -78,7 +76,7 @@ try{
 
 catch(\Exception $e)
 {
-$this->send_error_report($e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
+$this->sendmail($e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
 }
 
     }
@@ -167,7 +165,7 @@ try{
 //        echo $json;
 
 }catch(\Exception $e){
-$this->send_error_report( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
+$this->sendmail( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
 }
 
 
@@ -204,7 +202,7 @@ $this->send_error_report( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']
         }
 
      }catch(\Exception $e){
-         $this->send_error_report( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
+         $this->sendmail( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
      }
     }
 
@@ -218,9 +216,7 @@ $this->send_error_report( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']
 
     public function sync_natteamAction($lang)
     {
-        if( in_array($this->client_IP(),$this->allowed_sync_addrs) ){
-
-            try{
+        try{
         ini_set('max_execution_time', 1920);
 //        $league="l1";$lclass="l1";$lang="ar";
 
@@ -438,13 +434,8 @@ $this->send_error_report( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']
 
 
         }catch(\Exception $e){
-            $this->send_error_report( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
+            $this->sendmail( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
         }
-
-    }else{
-    $this->send_blocked_sync_report($this->client_IP(),$_SERVER['REQUEST_URI']);
-}
-
         return null;
     }
 
@@ -465,10 +456,7 @@ $this->send_error_report( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']
 
         //set_time_limit(960);
         //$league= 'l1';$lang='ar';$lclass='a';
-
-        if( in_array($this->client_IP(),$this->allowed_sync_addrs) ){
-
-            try{
+        try{
             ini_set('max_execution_time', 1920);
             $reldir='v1/leagues/'.$league.'/calres/'.$lclass.'/'.$lang.'/';
 
@@ -652,11 +640,9 @@ $this->send_error_report( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']
             //            echo $html;
             }
 catch(\Exception $e){
-$this->send_error_report( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
+$this->sendmail( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
 }
-    }else{
-            $this->send_blocked_sync_report($this->client_IP(),$_SERVER['REQUEST_URI']);
-}
+
         return null;
     }
 
@@ -674,9 +660,7 @@ $this->send_error_report( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']
 
     public function sync_rankingAction($lang,$league,$lclass)
     {
-        if( in_array($this->client_IP(),$this->allowed_sync_addrs) ){
-
-            try{
+        try{
         ini_set('max_execution_time', 1920);
 
 //        $league="l1";$lclass="l1";$lang="ar";
@@ -773,12 +757,9 @@ $this->send_error_report( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']
 
 
         }catch(\Exception $e){
-            $this->send_error_report( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
+            $this->sendmail( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
         }
 
-    }else{
-            $this->send_blocked_sync_report($this->client_IP(),$_SERVER['REQUEST_URI']);
-}
         return null;
     }
     /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -793,9 +774,7 @@ $this->send_error_report( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']
 
     public function sync_gencalAction()
     {
-        if( in_array($this->client_IP(),$this->allowed_sync_addrs) ){
-
-            try{
+        try{
             ini_set('max_execution_time', 1920);
             $url = 'http://www.ftf.org.tn/fr/calendriers/';
             $path_l1='/v1/leagues/l1/gencal/';
@@ -866,12 +845,8 @@ $this->send_error_report( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']
 //            echo $l2_b.'<br>';
 
         }catch (\Exception $e){
-            $this->send_error_report( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
-        }
 
-    }else{
-            $this->send_blocked_sync_report($this->client_IP(),$_SERVER['REQUEST_URI']);
-    }
+        }
     }
 
     /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -887,7 +862,6 @@ $this->send_error_report( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']
     public function sync_newsAction($lang,$cat)
     {
 
-	if( in_array($this->client_IP(),$this->allowed_sync_addrs) ){
 
         try{
             ini_set('max_execution_time', 1920);
@@ -993,12 +967,9 @@ $this->send_error_report( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']
 
 
         }catch(\Exception $e){
-            $this->send_error_report( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
+            $this->sendmail( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
         }
-	}else{
-        $this->send_blocked_sync_report($this->client_IP(),$_SERVER['REQUEST_URI']);
-    }
-	return null;
+    return null;
     }
 
 
@@ -1106,7 +1077,7 @@ private function get_fr_news($url,$cat,$lim,&$news_array,&$newscontent_array){
 
     }
     }catch (\Exception $e){
-        $this->send_error_report( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
+        $this->sendmail( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
         $this->del_dir_files($newsimages_tmpdata_dir);
         $this->del_dir_files($mobilenews_tmpdata_dir);
         return false;
@@ -1217,7 +1188,7 @@ return $sucess;
 
         }
         }catch (\Exception $e){
-            $this->send_error_report( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
+            $this->sendmail( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
             $this->del_dir_files($newsimages_tmpdata_dir);
             $this->del_dir_files($mobilenews_tmpdata_dir);
             return false;
@@ -1262,7 +1233,7 @@ private function downloadNewContent($newurl,$outFileName){
 
         file_put_contents($outFileName, $doc);
     }catch (\Exception $e){
-        $this->send_error_report( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
+        $this->sendmail( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
         //return null;
     }
 
@@ -1387,7 +1358,7 @@ private function downloadNewContent($newurl,$outFileName){
 
             return true;
         }catch (\Exception $e){
-            $this->send_error_report( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
+            $this->sendmail( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
             return false;
         }
 
@@ -1435,7 +1406,7 @@ private function downloadNewContent($newurl,$outFileName){
             }
         }
        }catch (\Exception $e){
-           $this->send_error_report( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
+           $this->sendmail( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
        }
        }
 
@@ -1447,7 +1418,7 @@ private function downloadNewContent($newurl,$outFileName){
             try{
                 return file_get_contents($url);
             }catch (\Exception $e){
-                $this->send_error_report( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
+                $this->sendmail( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
             }
 
 
@@ -1479,7 +1450,7 @@ try{
         unlink($file);
     }
 }catch (\Exception $e){
-    $this->send_error_report( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
+    $this->sendmail( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
 }
     }
     /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -1498,7 +1469,7 @@ try{
     rmdir($dir);
 }
 }catch (\Exception $e){
-    $this->send_error_report( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
+    $this->sendmail( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
 }
 
 }
@@ -1530,7 +1501,7 @@ try{
         $this->del_dir_files('../data/v1/newsimages/'.$cat.'/'.$lang);
         $this->del_dir_files('../data/v1/mobilenews/'.$cat.'/'.$lang);
 }catch (\Exception $e){
-//    $this->send_error_report( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
+//    $this->sendmail( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
 }
 
 }
@@ -1552,18 +1523,18 @@ try{
           $em->flush();//commit;
         }
 }catch (\Exception $e){
-    $this->send_error_report( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
+    $this->sendmail( $e->getLine(),$e->getMessage(),$_SERVER['REQUEST_URI']);
 }
 
     }
 
     /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-    public function send_error_report($code,$error,$link)
+    public function sendmail($code,$error,$link)
     {
 
         $transport = \Swift_SmtpTransport::newInstance("smtp.example.com",465,"ssl")
-        ->setUsername("adminName@example.com")->setPassword("adminPass");
+        ->setUsername("adminName@example.com")->setPassword("adminpass");
 
         $mailer = \Swift_Mailer::newInstance($transport);
 
@@ -1596,64 +1567,7 @@ try{
         $mailer->send($message);
 
     }
+
     /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
-    public function send_blocked_sync_report($ip,$link)
-    {
-
-        $transport = \Swift_SmtpTransport::newInstance("smtp.example.com",465,"ssl")
-        ->setUsername("adminName@example.com")->setPassword("adminPass");
-
-        $mailer = \Swift_Mailer::newInstance($transport);
-
-        date_default_timezone_set('Africa/Tunis');
-
-        $message = \Swift_Message::newInstance("Error Mail")
-            ->setSubject("Blocked Sync Operation")
-            ->setFrom('adminName@example.com')
-            ->setTo('adminName@example.com')
-            ->setBody(
-                $this->renderView(
-                // app/Resources/views/Emails/registration.html.twig
-                    'blocked_sync_ip_mail_template.html.twig',
-                    array('ip' => $ip,'link'=>$link,'time'=>gmdate("Y/m/j H:i:s", time() + 1*3600))
-                ),
-                'text/html'
-            )
-            /*
-             * If you also want to include a plaintext version of the message
-            ->addPart(
-                $this->renderView(
-                    'Emails/registration.txt.twig',
-                    array('name' => $name)
-                ),
-                'text/plain'
-            )
-            */
-        ;
-
-        $mailer->send($message);
-
-    }
-    /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
-	
-	public function client_IP(){
-
-    if (!empty($_SERVER['HTTP_CLIENT_IP']))   //check ip from share internet
-    {
-      $ip=$_SERVER['HTTP_CLIENT_IP'];
-    }
-    elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))   //to check ip is pass from proxy
-    {
-      $ip=$_SERVER['HTTP_X_FORWARDED_FOR'];
-    }
-    else
-    {
-      $ip=$_SERVER['REMOTE_ADDR'];
-    }
-	return $ip;
-	}
-    
-	/*------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 }

@@ -64,10 +64,11 @@ public class LanguageChanger {
 
     @TargetApi(Build.VERSION_CODES.N)
     private static Context updateResources(Context context, String language) {
-        Locale locale = new Locale(language);
+        Locale locale = new Locale(language.toLowerCase());
         Locale.setDefault(locale);
-        Configuration configuration = new Configuration();
-        configuration = context.getResources().getConfiguration();
+        //Configuration configuration = new Configuration();
+
+        Configuration configuration = context.getResources().getConfiguration();
         configuration.setLocale(locale);
 
         return context.createConfigurationContext(configuration);
@@ -75,13 +76,13 @@ public class LanguageChanger {
 
     @SuppressWarnings("deprecation")
     private static Context updateResourcesLegacy(Context context, String language) {
-        Locale locale = new Locale(language);
+        Locale locale = new Locale(language.toLowerCase());
         Locale.setDefault(locale);
 
         Resources resources = context.getResources();
-        Configuration configuration = new Configuration();
-        configuration = resources.getConfiguration();
-        configuration.locale = locale;
+        Configuration configuration = resources.getConfiguration();
+        //configuration = resources.getConfiguration();
+        configuration.setLocale(locale);
 
         resources.updateConfiguration(configuration, resources.getDisplayMetrics());
 
