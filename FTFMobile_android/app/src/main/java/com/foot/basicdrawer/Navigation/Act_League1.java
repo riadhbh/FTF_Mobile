@@ -1,6 +1,7 @@
 package com.foot.basicdrawer.Navigation;
 
 import android.app.*;
+import android.content.Intent;
 import android.os.*;
 import android.support.design.widget.*;
 import android.support.v4.view.*;
@@ -11,6 +12,8 @@ import android.widget.*;
 
 import com.foot.basicdrawer.Adapters.Leagues_frags_Adapter;
 import com.foot.basicdrawer.R;
+
+import java.io.Serializable;
 
 import static com.foot.basicdrawer.ToolBox.FrequentlyUsed.GotoAct;
 
@@ -116,7 +119,11 @@ public class Act_League1 extends AppCompatActivity {
                     GotoAct(Act_League1.this,Act_Natteam.class);
                     finish();
                 }else if (id == R.id.app_settings){
-                    GotoAct(Act_League1.this,Act_Settings.class);
+                    Intent i = new Intent(Act_League1.this, Act_Settings.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    i.putExtra("class", (Serializable) Act_League1.class);
+                    startActivity(i);
+                    finish();
                 }
                 /*
                 else if (id == R.id.mleague_reg) {

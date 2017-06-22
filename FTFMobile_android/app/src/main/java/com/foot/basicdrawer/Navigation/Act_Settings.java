@@ -297,8 +297,15 @@ builder2.create().show();
 
                             setLang_controller(getBaseContext(),lang);
 
+                            final Handler start = new Handler();
 
-                            Reload(Act_Settings.this);
+/*                            start.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {*/
+                                    Reload(Act_Settings.this);
+  /*                              }
+                            }, 500);
+*/
                         }
 //dismissing the dialog when the user makes a selection.
                         dialog.dismiss();
